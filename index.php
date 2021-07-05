@@ -53,7 +53,7 @@ include 'includes/inc_functions.php';
 	<div id="page" data-ng-init="" class="container-fluid">
 
 		<!-- header -->
-		<?php include_once("lib/header.html"); ?>
+		<?php include_once("lib/header.php"); ?>
 		<!-- header ends here -->
 		<main>
 			<div id="carousel-home">
@@ -81,7 +81,7 @@ include 'includes/inc_functions.php';
 				<div class="main_title">
 					<h2>Top Selling</h2>
 					<span>Products</span>
-					<p>Cum doctus civibus efficiantur in imperdiet deterruisset</p>
+					<!-- <p>Cum doctus civibus efficiantur in imperdiet deterruisset</p> -->
 				</div>
 				<div class="row small-gutters">
 
@@ -105,7 +105,7 @@ include 'includes/inc_functions.php';
 							<div class="grid_item">
 								<figure>
 									<span class="ribbon off">-30%</span>
-									<a href="product.php?id=<?php echo $encodeproducturl; ?>">
+									<a href="product.php?id=<?php echo $encodeproducturl; ?>&&cat=<?php echo $productrow["category"] ?>">
 										<img class="img-fluid lazy" width="200" height="240" src="llp/product_image/<?php echo $realimage; ?>" data-src="llp/product_image/<?php echo $realimage; ?>" alt="">
 
 									</a>
@@ -139,7 +139,7 @@ include 'includes/inc_functions.php';
 				<div class="main_title">
 					<h2>Featured</h2>
 					<span>Products</span>
-					<p>Cum doctus civibus efficiantur in imperdiet deterruisset</p>
+					<!-- <p>Cum doctus civibus efficiantur in imperdiet deterruisset</p> -->
 				</div>
 				<div class="owl-carousel owl-theme products_carousel">
 					<div class="item">
@@ -270,7 +270,7 @@ include 'includes/inc_functions.php';
 			<!-- /container -->
 
 			<!-- patnership -->
-			<?php include_once("lib/patnership.html"); ?>
+			<?php include_once("lib/patnership.php"); ?>
 			<!-- patnership ends here -->
 			<div class="container margin_60_35">
 				<div class="main_title">
@@ -349,7 +349,7 @@ include 'includes/inc_functions.php';
 		<!-- footer -->
 
 		<?php
-		include_once("lib/footer.html");
+		include_once("lib/footer.php");
 		?>
 
 		<!--/footer-->

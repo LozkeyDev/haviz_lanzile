@@ -1,3 +1,14 @@
+<?php
+include_once("includes/inc_functions.php");
+
+$select_cat = $conn->query("SELECT * FROM tbl_category");
+$select_contact = $conn->query("SELECT * FROM tbl_category");
+$select_followus = $conn->query("SELECT * FROM tbl_follow_us");
+
+
+
+?>
+
 <header class="version_1">
     <div class="layer"></div> <!-- Mobile menu overlay mask -->
     <div class="main_header">
@@ -32,7 +43,7 @@
                                     <li><a href="index-4.html">GDPR Cookie Bar</a></li>
                                 </ul>
                             </li> -->
-                            <!-- <li class="megamenu submenu">
+                        <!-- <li class="megamenu submenu">
                                 <a href="javascript:void(0);" class="show-submenu-mega">Pages</a>
                                 <div class="menu-wrapper">
                                     <div class="row small-gutters">
@@ -60,7 +71,7 @@
                                                 <li><a href="product-detail-3.html">Product Sticky Info</a></li>
                                             </ul>
                                         </div> -->
-                                        <!--<div class="col-lg-3">
+                        <!--<div class="col-lg-3">
                                             <h3>Other pages</h3>
                                             <ul>
                                                 <li><a href="cart.html">Cart Page</a></li>
@@ -101,10 +112,10 @@
                                     <li><a href="modal-newsletter.html">Modal Newsletter</a></li>
                                 </ul>
                             </li> -->
-                            <!--<li>
+                        <!--<li>
                                 <a href="blog.html">Blog</a>
                             </li>-->
-                            <!--<li>
+                        <!--<li>
                                  <a href="#0">Buy Template</a>
                             </li>-->
                         </ul>
@@ -196,7 +207,7 @@
                 </div>
                 <div class="col-xl-6 col-lg-7 col-md-6 d-none d-md-block">
                     <div class="custom-search-input">
-                        <input type="text" placeholder="Search over 10.000 products">
+                        <input type="text" placeholder="Search over 10,000 products">
                         <button type="submit"><i class="header-icon_search_custom"></i></button>
                     </div>
                 </div>
@@ -248,9 +259,7 @@
                                         <li>
                                             <a href="account.html"><i class="ti-user"></i>My Profile</a>
                                         </li>
-                                        <li>
-                                            <a href="help.html"><i class="ti-help-alt"></i>Help and Faq</a>
-                                        </li>
+                                        
                                     </ul>
                                 </div>
                             </div>

@@ -1,3 +1,13 @@
+<?php
+	include_once("includes/inc_functions.php");
+
+	$select_cat = $conn->query("SELECT * FROM tbl_category");
+	$select_contact = $conn->query("SELECT * FROM tbl_category");
+	$select_followus = $conn->query("SELECT * FROM tbl_follow_us");
+
+
+
+?>
 <footer class="revealed">
 		<div class="container">
 			<div class="row">
@@ -6,11 +16,11 @@
 					<div class="collapse dont-collapse-sm links" id="collapse_1">
 						<ul>
 							<li><a href="about.html">About us</a></li>
-							<li><a href="help.html">Faq</a></li>
+							
 							<li><a href="help.html">Help</a></li>
 							<li><a href="account.html">My account</a></li>
-							<li><a href="blog.html">Blog</a></li>
-							<li><a href="contacts.html">Contacts</a></li>
+							
+							<li><a href="contacts.php">Contacts</a></li>
 						</ul>
 					</div>
 				</div>
@@ -38,14 +48,7 @@
 					</div>
 				</div>
 				<div class="col-lg-3 col-md-6">
-						<h3 data-target="#collapse_4">Keep in touch</h3>
-					<div class="collapse dont-collapse-sm" id="collapse_4">
-						<div id="newsletter">
-						    <div class="form-group">
-						        <input type="email" name="email_newsletter" id="email_newsletter" class="form-control" placeholder="Your email">
-						        <button type="submit" id="submit-newsletter"><i class="ti-angle-double-right"></i></button>
-						    </div>
-						</div>
+						
 						<div class="follow_us">
 							<h5>Follow Us</h5>
 							<ul>
@@ -86,9 +89,9 @@
 				</div>
 				<div class="col-lg-6">
 					<ul class="additional_links">
-						<li><a href="#0">Terms and conditions</a></li>
-						<li><a href="#0">Privacy</a></li>
-						<li><span>© 2020 Allaia</span></li>
+						<li><a href="#">Terms and conditions</a></li>
+						<li><a href="#">Privacy</a></li>
+						<li><span>© <?php echo date("Y"); ?> Haviz Lanzile</span></li>
 					</ul>
 				</div>
 			</div>

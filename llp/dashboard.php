@@ -28,6 +28,7 @@
     <link rel="stylesheet" href="bower_components/bootstrap-daterangepicker/daterangepicker.css">
     <!-- bootstrap wysihtml5 - text editor -->
     <link rel="stylesheet" href="plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
+    <link rel="shortcut icon" href="../img/1fa39604-50a2-4ad7-9a48-85271cdbc0bd (1).ico" type="image/x-icon">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -45,7 +46,7 @@
         <!-- header -->
         <?php include_once("pages/header.php"); ?>
         <!-- Left side column. contains the logo and sidebar -->
-       <?php include_once("pages/sidebar.php"); ?>
+        <?php include_once("pages/sidebar.php"); ?>
 
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">

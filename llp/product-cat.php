@@ -32,6 +32,7 @@
     <link rel="stylesheet" href="plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
 
     <link rel="stylesheet" type="text/css" href="assets/DataTables-1.10.23/css/dataTables.bootstrap4.min.css">
+    <link rel="shortcut icon" href="../img/1fa39604-50a2-4ad7-9a48-85271cdbc0bd (1).ico" type="image/x-icon">
 
     <!-- Google Font -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
@@ -58,27 +59,26 @@
                 </ol>
             </section>
             <div class="row container">
-               <?php
-                if(isset($_GET['cat_id']) && isset($_GET['action'])){
+                <?php
+                if (isset($_GET['cat_id']) && isset($_GET['action'])) {
                     $id = $_GET['cat_id'];
                     $de = urldecode($id);
                     $cat_id = base64_decode($de);
                     $action = $_GET['action'];
-                
-                    if($action == "delete") {
-                            $sel = $conn->query("SELECT id FROM tbl_category WHERE id = '$cat_id'");
-                            if ($sel->num_rows == 0) {
-                                echo message("danger", "Category already deleted");
-                            } else {
-                                $del = $conn->query("DELETE FROM tbl_category WHERE id = '$cat_id'");
-                                if ($del) {
-                                    echo message("info", "You have successfully removed a category");
-                                }
+
+                    if ($action == "delete") {
+                        $sel = $conn->query("SELECT id FROM tbl_category WHERE id = '$cat_id'");
+                        if ($sel->num_rows == 0) {
+                            echo message("danger", "Category already deleted");
+                        } else {
+                            $del = $conn->query("DELETE FROM tbl_category WHERE id = '$cat_id'");
+                            if ($del) {
+                                echo message("info", "You have successfully removed a category");
                             }
+                        }
                     }
-                   
                 }
-            ?>
+                ?>
                 <form method="POST" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" class="form-horizontal">
                     <div class="alert" id="alert" style="display: none"></div>
 
@@ -231,7 +231,7 @@
             $('#dataTables-example').dataTable();
 
             // time alert
-            
+
             $("#alert-message").slideDown().delay(2000).slideUp();
 
             $("#upload").on("click", (err) => {
@@ -252,8 +252,8 @@
                             if (tx.status == 0) {
                                 $("#alert").addClass("alert-success").slideDown().delay(2000).slideUp().delay(2000).html("Category added successfully");
                                 window.location = "product-cat.php";
-                                
-                            }   
+
+                            }
 
                         }
                     })
