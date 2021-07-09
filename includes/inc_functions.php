@@ -69,7 +69,7 @@ function adminsignin($conn, $array){
             $result = mysqli_fetch_array($check);
             session_start();
             $_SESSION['adminid'] = $result['admin_id']."_"."unique" ;
-            header("location: index.php");
+            header("location: dashboard.php");
         }
         else{
             echo message("danger", "Invalid Login Parameters");
@@ -79,6 +79,51 @@ function adminsignin($conn, $array){
 }
 // Admin login function ends here
 
+function uploadBanner($conn, $banner){
+    $img_name = $banner['name'];
+    $img_tmp = $banner['tmp_name'];
+    $ext = pathinfo($img_name, PATHINFO_EXTENSION);
+    $extension = array("jpeg", "jpg", "png", "gif");
+    if (in_array($ext, $extension)) {
+        $move = move_uploaded_file($img_tmp, "banner_image/" . $img_name);
+        if ($move) {
+            $ins = $conn->query("INSERT INTO tbl_banner(`banner`) VALUES('$img_name')") or die(mysqli_error($conn));
+            if ($ins) {
+                echo message("success", "Banner addedd");
+            }
+        }
+
+}
+ else {
+            echo message("danger", "Image Error");
+            $upload = 0;
+        }
+}
+function uploadTestimonial($conn, $data){
+
+        $fullname = $data[0];
+        $testimony = $data[1];
+        $img_name = $data[2]['name'];
+        $img_tmp = $data[2]['tmp_name'];
+        $ext = pathinfo($img_name, PATHINFO_EXTENSION);
+        $extension = array("jpeg", "jpg", "png", "gif");
+
+
+        $upload = 1;
+        if (in_array($ext, $extension)) {
+            $move = move_uploaded_file($img_tmp, "product_image/" . $img_name);
+        if ($move) {
+            $ins = $conn->query("INSERT INTO tbl_testimonial(`fullname`, `testimonial`, `userPicture`) VALUES('$fullname', '$testimony', '$img_name')") or die(mysqli_error($conn));
+            if($ins){
+                echo message("success", "Testimonial addedd");
+            }
+        }
+            $upload = 1;
+        } else {
+            echo message("danger", "Image Error");
+            $upload = 0;
+        }
+}
 
 // Upload product
 function uploadproduct($conn, $array){
@@ -93,6 +138,9 @@ function uploadproduct($conn, $array){
     $productquantity = cleanString($conn, $array[6]);
     $productSize = cleanString($conn, $array[7]);
     $productColor = cleanString($conn, $array[8]);
+    $oldAmount = cleanString($conn, $array[9]);
+    $discount = cleanString($conn, $array[10]);
+
 
 
     $date = date("d M, Y");
@@ -109,6 +157,7 @@ function uploadproduct($conn, $array){
         $upload = 1;
         if (in_array($ext,$extension)) {
             move_uploaded_file($img_tmp, "product_image/".$img_name);
+            
             $upload = 1;
         }
         else {
@@ -117,7 +166,7 @@ function uploadproduct($conn, $array){
         }
     }
 
-    if (empty($productname) || empty($productdesc) || empty($productfeatures) || empty($productcategory) || empty($productimage) || empty($proouctamount) ) {
+    if (empty($productname) || empty($productdesc) || empty($productcategory) || empty($productimage) || empty($proouctamount) ) {
         echo message("danger", "All Fields are Required");
     }
 
@@ -126,7 +175,7 @@ function uploadproduct($conn, $array){
     }
     
     else{
-       $uploadresult = mysqli_query($conn, "INSERT INTO `tbl_product`(`productname`, `description`, `feature`, `category`,  `image`, `amount`, `quantity`, `size`, `color`, `date`) VALUES ('$productname', '$productdesc', '$productfeatures', '$productcategory', '$imgname', '$proouctamount', '$productquantity', '$productSize', '$productColor','$date')") or die(mysqli_error($conn));
+       $uploadresult = mysqli_query($conn, "INSERT INTO `tbl_product`(`productname`, `description`, `feature`, `category`,  `image`, `amount`, `quantity`, `size`, `color`, `discount`, `old_price`, `date`) VALUES ('$productname', '$productdesc', '$productfeatures', '$productcategory', '$imgname', '$proouctamount', '$productquantity', '$productSize', '$productColor',, '$discount',, '$oldAmount','$date')") or die(mysqli_error($conn));
        if ($uploadresult) {
            echo message("success", "Product added Successfully");
        }
@@ -321,13 +370,66 @@ function edit_category($id){
 
 
 }
+function updateContact($contacts){
+    global $conn;
+
+    $phoneNumber = cleanString($conn, $contacts[0]);
+    $exp = explode(",", $phoneNumber);
+    $phoneNumber1 = $exp[0];
+
+    $email = cleanString($conn, $contacts[1]);
+    $houseAddress = cleanString($conn, $contacts[2]);
+
+    
+        if(empty($phoneNumber1) || empty($email) || empty($houseAddress)){
+            echo message("danger", "All fields are required");
+        }
+        else{
+        $res = mysqli_query($conn, "UPDATE `tbl_contact` SET `phoneNo`='$phoneNumber', `email`='$email', `address`='$houseAddress'") or die(mysqli_error($conn));
+
+        if($res){
+            echo message("success", "Contacts updated successfully");
+        }
+    }
+    
+}
+
+function postContact($contacts){
+        global $conn;
+        
+        $phoneNumber = cleanString($conn, $contacts[0]);
+        $exp = explode(",", $phoneNumber);
+        $phoneNumber1 = $exp[0];
+         
+        $email = cleanString($conn, $contacts[1]);
+        $houseAddress = cleanString($conn, $contacts[2]);
+        if (empty($phoneNumber1 || empty($email) || empty($houseAddress))) {
+            echo message("danger", "All fields are required");
+        }
+        // chech if already inserted
+        $sel = $conn->query("SELECT id FROM tbl_contact");
+        
+        if (mysqli_num_rows($sel) > 0) {
+            echo message("danger", "Contacts already inserted.. Kindly edit contact");
+        } else {
+
+            $res = mysqli_query($conn, "INSERT INTO `tbl_contact`(`phoneNo`, `email`, `address`) VALUES ('$phoneNumber', '$email', '$houseAddress')") or die(mysqli_error($conn));
+            if ($res) {
+                echo message("success", "Contacts added successfully");
+            } else {
+                echo message("danger","An error has occured... try again later");
+            }
+        }
+    }
+
 
 $action = @$_POST['action'];
 if($action == "post-category"){
     echo (new doSomething)->postCategory();
 }
-elseif($action == "view-category"){
-    echo (new doSomething)->viewCategory();
+
+elseif ($action == "post-contact") {
+    // echo (new doSomething)->postContact();
 }
 class doSomething{
 
@@ -345,17 +447,7 @@ class doSomething{
         return json_encode(["status"=>$status]);
     }
 
-    public function viewCategory(){
-        global $conn;
-        $selme = $conn->query("SELECT * FROM tbl_category") or die(mysqli_error($conn));
-        $allcat = [];
-        while($row = mysqli_fetch_array($selme)){
-            $allcat[] = $row;
-        }
-        return json_encode(["result"=>$allcat]);
-    }
-
-
+   
 }
 
 

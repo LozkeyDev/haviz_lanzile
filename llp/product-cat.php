@@ -1,4 +1,7 @@
-<?php include_once("../includes/inc_functions.php"); ?>
+<?php include_once("../includes/inc_functions.php");
+        // include_once("../includes/redirect.php");
+
+?>
 
 <!DOCTYPE html>
 <html>

@@ -24,7 +24,7 @@ if (isset($_GET["id"])) {
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<meta name="description" content="">
-	<meta name="author" content="Ansonika">
+	<meta name="author" content="Haviz Lanzile">
 	<title> Haviz Lanzile | </title>
 
 	<!-- Favicons-->
@@ -46,7 +46,36 @@ if (isset($_GET["id"])) {
 
 	<!-- YOUR CUSTOM CSS -->
 	<link href="css/custom.css" rel="stylesheet">
+	<style>
+		.owl-theme .owl-nav.disabled+.owl-dots {
+			float: left;
+		}
 
+		#contactUs {
+			float: right;
+		}
+
+		/* .grid_item{
+			width: 300px;
+		} */
+
+		@media (max-width: 540px) {
+
+			.owl-carousel .owl-item img {
+				display: block;
+				width: 60%;
+			}
+
+			.item {
+				width: 100%;
+			}
+
+			#owl-lazy {
+				display: block;
+				width: 100%;
+			}
+		}
+	</style>
 </head>
 
 <body>
@@ -96,8 +125,14 @@ if (isset($_GET["id"])) {
 							<p><small> <?php echo $row["productname"]; ?> </small><br><?php echo $row["description"]; ?></p>
 
 						</div>
+						<div class="prod_info version_2" style="margin-top: -15px;">
 
-						<div class="prod_options version_2">
+							<p> <?php if (!empty($row["feature"])) {
+									echo $row["feature"];
+								} ?></p>
+						</div>
+
+						<div class="prod_options version_2" style="margin-top: -15px;">
 
 							<div class="row">
 								<?php
@@ -106,16 +141,7 @@ if (isset($_GET["id"])) {
 
 								<?php } ?>
 
-								<!-- <div class="col-xl-5 col-lg-5 col-md-6 col-6">
-									<div class="custom-select-form">
-										<select class="wide">
-											<option value="" selected="">Small (S)</option>
-											<option value="">M</option>
-											<option value=" ">L</option>
-											<option value=" ">XL</option>
-										</select>
-									</div>
-								</div> -->
+								
 							</div>
 							<div class="row">
 								<?php
@@ -142,7 +168,9 @@ if (isset($_GET["id"])) {
 								</div>
 								<div class="col-lg-5 col-md-6">
 									<div class="btn_add_to_cart"><a href="#" class="btn_1">Add to Cart</a></div>
+									<div class="mt-2" id="contactUs"><a href="tel:08108885919" class="btn_1" style="background:#FFC107;">Contact Us Now</a></div>
 								</div>
+
 							</div>
 
 
@@ -150,10 +178,11 @@ if (isset($_GET["id"])) {
 
 
 					</div>
-					<div class="col-lg-3" style="background: white; border: 1px solid #44288A; box-shadow: 15px 5px;padding: 10px 10px;">
-						<span style="font-weight: bold">Delivery Returns </span>
-						<hr style="">
+					<div class="col-lg-3" style="background-color: white; border: 1px solid #44288A; box-shadow: 15px 5px;padding: 10px 10px;">
+						<span style="font-weight: bold">Delivery Returns </span> <br>
+
 						<span><b>Haviz Lanzile </b> </span> <i style="color: darkorange">Express</i>
+						<img src="delivery_man.png" alt="" height="300" width="300">
 
 					</div>
 				</div>
@@ -179,59 +208,22 @@ if (isset($_GET["id"])) {
 								<div class="card-header" role="tab" id="heading-A">
 									<h5 class="mb-0">
 										<a class="collapsed" data-toggle="collapse" href="#collapse-A" aria-expanded="false" aria-controls="collapse-A">
-											Description
+											Reviews
 										</a>
 									</h5>
 								</div>
 
-								<!-- <div id="collapse-A" class="collapse" role="tabpanel" aria-labelledby="heading-A">
-									<div class="card-body">
-										<div class="row justify-content-between">
-											<div class="col-lg-6">
-												<h3>Details</h3>
-												<p>Lorem ipsum dolor sit amet, in eleifend <strong>inimicus elaboraret</strong> his, harum efficiendi mel ne. Sale percipit vituperata ex mel, sea ne essent aeterno sanctus, nam ea laoreet civibus electram. Ea vis eius explicari. Quot iuvaret ad has.</p>
-												<p>Vis ei ipsum conclusionemque. Te enim suscipit recusabo mea, ne vis mazim aliquando, everti insolens at sit. Cu vel modo unum quaestio, in vide dicta has. Ut his laudem explicari adversarium, nisl <strong>laboramus hendrerit</strong> te his, alia lobortis vis ea.</p>
-												<p>Perfecto eleifend sea no, cu audire voluptatibus eam. An alii praesent sit, nobis numquam principes ea eos, cu autem constituto suscipiantur eam. Ex graeci elaboraret pro. Mei te omnis tantas, nobis viderer vivendo ex has.</p>
-											</div>
-											<div class="col-lg-5">
-												<h3>Specifications</h3>
-												<div class="table-responsive">
-													<table class="table table-sm table-striped">
-														<tbody>
-															<tr>
-																<td><strong>Color</strong></td>
-																<td>Blue, Purple</td>
-															</tr>
-															<tr>
-																<td><strong>Size</strong></td>
-																<td>150x100x100</td>
-															</tr>
-															<tr>
-																<td><strong>Weight</strong></td>
-																<td>0.6kg</td>
-															</tr>
-															<tr>
-																<td><strong>Manifacturer</strong></td>
-																<td>Manifacturer</td>
-															</tr>
-														</tbody>
-													</table>
-												</div>
-												
-											</div>
-										</div>
-									</div>
-								</div> -->
+
 							</div>
 							<!-- /TAB A -->
 							<div id="pane-B" class="card tab-pane fade" role="tabpanel" aria-labelledby="tab-B">
-								<div class="card-header" role="tab" id="heading-B">
+								<!-- <div class="card-header" role="tab" id="heading-B">
 									<h5 class="mb-0">
 										<a class="collapsed" data-toggle="collapse" href="#collapse-B" aria-expanded="false" aria-controls="collapse-B">
 											Reviews
 										</a>
 									</h5>
-								</div>
+								</div> -->
 								<div id="collapse-A" class="collapse" role="tabpanel" aria-labelledby="heading-A">
 									<div class="card-body">
 										<div class="row justify-content-between">
@@ -241,7 +233,7 @@ if (isset($_GET["id"])) {
 														<span class="rating"><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><em>5.0/5.0</em></span>
 														<em>Published 54 minutes ago</em>
 													</div>
-													<h4>"Commpletely satisfied"</h4>
+													<h4>"Completely satisfied"</h4>
 													<p>Eos tollit ancillae ea, lorem consulatu qui ne, eu eros eirmod scaevola sea. Et nec tantas accusamus salutatus, sit commodo veritus te, erat legere fabulas has ut. Rebum laudem cum ea, ius essent fuisset ut. Viderer petentium cu his.</p>
 												</div>
 											</div>
@@ -280,8 +272,8 @@ if (isset($_GET["id"])) {
 
 								$chkme2 = $conn->query("SELECT * FROM tbl_product WHERE category = '$cat'") or die(mysqli_error($conn));
 								while ($row2 = mysqli_fetch_array($chkme2)) {
-								$producturl = base64_encode($row2['id']);
-								$encodeproducturl = urlencode($producturl);
+									$producturl = base64_encode($row2['id']);
+									$encodeproducturl = urlencode($producturl);
 									$rawimage = $row2["image"];
 									$rawimage = explode(",", $rawimage);
 									$rawimage = array_filter($rawimage);
@@ -291,8 +283,8 @@ if (isset($_GET["id"])) {
 										<div class="grid_item">
 											<span class="ribbon new">New</span>
 											<figure>
-												<a href="product.php?id=<?php echo $encodeproducturl; ?>&&cat=<?php echo $row2["category"]?>">
-													<img class="owl-lazy" src="llp/product_image/<?php echo $realimage; ?>" data-src="llp/product_image/<?php echo $realimage; ?>" alt="">
+												<a href="product.php?id=<?php echo $encodeproducturl; ?>&&cat=<?php echo $row2["category"] ?>">
+													<img class="owl-lazy" id="owl-lazy" src="llp/product_image/<?php echo $realimage; ?>" data-src="llp/product_image/<?php echo $realimage; ?>" alt="" width="500">
 												</a>
 											</figure>
 											<div class="rating"><i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star"></i></div>
@@ -320,7 +312,7 @@ if (isset($_GET["id"])) {
 					</div>
 					<!-- /container -->
 				</div>
-				
+
 
 		</main>
 		<!-- /main -->
@@ -339,12 +331,12 @@ if (isset($_GET["id"])) {
 			<label>1 product added to cart</label>
 		</div>
 		<!-- /header_panel -->
-		
+
 	</div>
-	
-		<!-- /item -->
-		
-	
+
+	<!-- /item -->
+
+
 
 	<!-- COMMON SCRIPTS -->
 	<script src="js/common_scripts.min.js"></script>

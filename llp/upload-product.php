@@ -64,7 +64,7 @@
 
                 <?php
                 if (isset($_POST['uploadProduct'])) {
-                    $createproduct = array($_POST['productname'], $_POST['productdesc'], $_POST['productfeatures'], $_POST['productcategory'], $_FILES['productimage'], $_POST['productamount'], $_POST['productquantity'], $_POST['productSize'], $_POST['productColor']);
+                    $createproduct = array($_POST['productname'], $_POST['productdesc'], $_POST['productfeatures'], $_POST['productcategory'], $_FILES['productimage'], $_POST['productamount'], $_POST['productquantity'], $_POST['productSize'], $_POST['productColor'], $_POST['oldamount'], $_POST['productDiscount']);
                     uploadproduct($conn, $createproduct);
                 }
                 ?>
@@ -96,20 +96,25 @@
                                         <label for="textarea-input" class=" form-control-label">Features <b style="color: red">*</b></label>
                                     </div>
                                     <div class="col-12 col-md-9">
-                                        <textarea name="productfeatures" id="productfeatures" rows="4" placeholder="Content..." class="form-control" required></textarea>
+                                        <textarea name="productfeatures" id="productfeatures" rows="4" placeholder="Content..." class="form-control"></textarea>
                                     </div>
                                 </div>
                                 <div class="row form-group">
                                     <div class="col col-md-3">
                                         <label for="select" class=" form-control-label">Category <b style="color: red">*</b></label>
                                     </div>
+
                                     <div class="col-12 col-md-9">
+
                                         <select name="productcategory" id="productcategory" class="form-control" required>
-                                            <option value="0">Please select</option>
-                                            <option value="clothing">Clothing</option>
-                                            <option value="shoe">Shoe</option>
-                                            <option value="bag">Bag</option>
-                                            <option value="wristwatch">Wristwatch</option>
+                                            <option value="0" selected disabled>Please select</option>
+                                            <?php
+                                            $sel = $conn->query("SELECT * FROM tbl_category");
+                                                while ($row = mysqli_fetch_array($sel)){
+                                            ?>
+                                            <option value="<?php echo $row["category"]; ?>"><?php echo $row["category"]; ?></option>
+
+                                            <?php } ?>
 
                                         </select>
                                     </div>
@@ -122,7 +127,7 @@
                                         <input type="file" id="productimage" name="productimage[]" multiple class="form-control-file" required>
                                     </div>
                                 </div>
-                                <div class="row form-group">
+                                <!-- <div class="row form-group">
                                     <div class="col col-md-3">
                                         <label for="textarea-input" class=" form-control-label">Background</label>
                                     </div>
@@ -130,7 +135,7 @@
                                         <input type="color" name="productbg" id="productbg" value="#f5f5f5">
                                         <small style="color: red;">*for image without background</small>
                                     </div>
-                                </div>
+                                </div> -->
                                 <div class="row form-group">
                                     <div class="col col-md-3">
                                         <label for="file-multiple-input" class=" form-control-label">Amount <b style="color: red">*</b></label>
@@ -168,7 +173,7 @@
                                     <label for="text-input" class=" form-control-label">Size</label>
                                 </div>
                                 <div class="col-12 col-md-9">
-                                    <input name="productSize" type="text" id="productSize" placeholder="Product Name" class="form-control">
+                                    <input name="productSize" type="text" id="productSize" placeholder="Product Size" class="form-control">
                                 </div>
                             </div>
 
@@ -178,7 +183,7 @@
                                 </div>
                                 <div class="col-12 col-md-9">
                                     <select name="productColor" id="productColor" class="form-control">
-                                        <option value="0">Please select</option>
+                                        <option value="0" selected disabled>Please select</option>
                                         <option value="white">White</option>
                                         <option value="black">Black</option>
                                         <option value="brown">Brown</option>

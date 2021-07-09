@@ -1,3 +1,12 @@
+<?php 
+include_once("../includes/inc_functions.php");
+// include_once("../includes/redirect.php");
+    // session_start();
+    $adminid = $_SESSION["adminid"];
+    $exp = explode("_", $adminid);
+    $sel = $conn->query("SELECT * FROM tbl_admin WHERE admin_id = '$exp[0]'") or die(mysqli_error($conn));
+    $row = mysqli_fetch_array($sel);
+?>
 <!DOCTYPE html>
 <html>
 
