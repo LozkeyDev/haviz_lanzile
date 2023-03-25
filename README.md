@@ -1,1 +1,1 @@
-# haviz_lanzile
+# E-commerce Website using PHP and MySQL Database
